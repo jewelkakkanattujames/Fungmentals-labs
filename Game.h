@@ -18,12 +18,12 @@ public:
 	void Render();
 	void Clean();
 
-	SDL_Window* GetWindow() { return m_pWindow; }
-	SDL_Renderer* GetRenderer() { return m_pRenderer; }
+	SDL_Window* GetWindow() { return g_window; }
+	SDL_Renderer* GetRenderer() { return g_Renderer; }
 
 private:
-	bool m_running;
-	SDL_Window* m_pWindow;
-	SDL_Renderer* m_pRenderer;
-	const Uint8* m_keyStates;
+	bool is_running;
+	SDL_Window* g_window;
+	SDL_Renderer* g_Renderer;
+	const Uint8* g_keyState;
 };

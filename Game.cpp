@@ -4,10 +4,10 @@
 #include "States.h"  // Include the "States.h" header file
 
 Game::Game()
-    : m_running(false)
-    , m_pWindow(nullptr)
-    , m_pRenderer(nullptr)
-    , m_keyStates(nullptr)
+    : is_running(false)
+    , g_window(nullptr)
+    , g_Renderer(nullptr)
+    , g_keyState(nullptr)
 {
 
 }
@@ -35,11 +35,11 @@ int Game::Init(const char* title, int xPos, int yPos)
     }
 
     // Attempt to create a maximized window that can be restored to a kWidthxkHeight, centered window.
-    m_pWindow = SDL_CreateWindow("Jewel James",            // title
+    g_window = SDL_CreateWindow("Jewel James",            // title
         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,  // x, y
         kWidth, kHeight,                                 // w, h
         0);                                              // flags
-    if (m_pWindow != nullptr)
+    if (g_window != nullptr)
     {
         std::cout << "SDL_CreateWindow() succeeded." << std::endl;
     }
@@ -52,15 +52,15 @@ int Game::Init(const char* title, int xPos, int yPos)
     }
 
     // Attempts to create a hardware-accelerated renderer for our window.
-    m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, SDL_RENDERER_ACCELERATED);
-    if (m_pRenderer != nullptr)
+    g_Renderer = SDL_CreateRenderer(g_window, -1, SDL_RENDERER_ACCELERATED);
+    if (g_Renderer != nullptr)
     {
         std::cout << "SDL_CreateRenderer() succeeded." << std::endl;
     }
     else
     {
         std::cout << "SDL_CreateRenderer() failed. Error: " << SDL_GetError() << std::endl;
-        SDL_DestroyWindow(m_pWindow);
+        SDL_DestroyWindow(g_window);
         SDL_Quit();
         system("pause");
         return -1;
@@ -69,15 +69,15 @@ int Game::Init(const char* title, int xPos, int yPos)
 
     StateManager::PushState(new TitleState());  // Push the TitleState onto the state stack
 
-    m_keyStates = SDL_GetKeyboardState(nullptr);  // Get the current keyboard state
+    g_keyState = SDL_GetKeyboardState(nullptr);  // Get the current keyboard state
 
-    m_running = true;
+    is_running = true;
     return 0;
 }
 
 bool Game::IsRunning()
 {
-    return m_running;
+    return is_running;
 }
 
 void Game::HandleEvents()
@@ -88,7 +88,7 @@ void Game::HandleEvents()
         switch (event.type)
         {
         case SDL_QUIT:
-            m_running = false;  // Quit the game loop if the window is closed
+            is_running = false;  // Quit the game loop if the window is closed
             break;
         }
     }
@@ -96,9 +96,9 @@ void Game::HandleEvents()
 
 bool Game::KeyDown(SDL_Scancode key)
 {
-    if (m_keyStates)
+    if (g_keyState)
     {
-        return m_keyStates[key] == 1;  // Check if the specified key is currently pressed
+        return g_keyState[key] == 1;  // Check if the specified key is currently pressed
     }
     return false;
 }
@@ -111,15 +111,15 @@ void Game::Update(float deltaTime)
 void Game::Render()
 {
     StateManager::Render();  // Render the current state
-    SDL_RenderPresent(m_pRenderer);  // Update the screen
+    SDL_RenderPresent(g_Renderer);  // Update the screen
 }
 
 void Game::Clean()
 {
     std::cout << "Cleaning engine..." << std::endl;
     StateManager::Quit();  // Clean up the state manager
-    SDL_DestroyRenderer(m_pRenderer);  // Destroy the renderer
-    SDL_DestroyWindow(m_pWindow);  // Destroy the window
+    SDL_DestroyRenderer(g_Renderer);  // Destroy the renderer
+    SDL_DestroyWindow(g_window);  // Destroy the window
     SDL_Quit();  // Quit SDL
 
     delete this;  // Delete the Game instance

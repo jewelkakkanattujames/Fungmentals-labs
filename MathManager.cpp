@@ -50,15 +50,17 @@ SDL_FPoint MathManager::Normalize(SDL_FPoint v)
 // Calculate the angle between two points
 double MathManager::AngleBetweenPoints(const double dy, const double dx)
 {
-	return atan2(dy, dx); // In radians.
+	return atan2(dy, dx) * (180.0 / M_PI); // Convert to degrees.
 }
+
 
 // Set the deltas (changes in x and y) based on an angle and scaling factors
 void MathManager::SetDeltas(const double angle, double& dx, double& dy, double fx, double fy)
 {
-	dx = SetDeltaX(angle, fx);
-	dy = SetDeltaY(angle, fy);
+	dx = fx * cos(angle);
+	dy = fy * sin(angle);
 }
+
 
 // Calculate the delta x based on an angle and a scaling factor
 double MathManager::SetDeltaX(const double angle, double fx)
@@ -135,7 +137,7 @@ double MathManager::LerpRad(double a, double b, double factor)
 	double result;
 	double diff = b - a;
 
-	// Adjust the angles if the difference is larger than pi radians
+	/// Adjust the angles if the difference is larger than pi radians
 	if (diff < -M_PI)
 	{
 		b += M_PI * 2;
@@ -151,19 +153,31 @@ double MathManager::LerpRad(double a, double b, double factor)
 			result += M_PI * 2;
 	}
 	else
+	{
 		result = LerpD(a, b, factor);
+	}
 
 	return result;
+
 }
 
 // Calculate the halfway point between two SDL_Point points
 SDL_Point MathManager::HalfwayPoint(const SDL_Point& from, const SDL_Point& to)
 {
-	return { (int)(((double)from.x + (double)to.x) / 2.0), (int)(((double)from.y + (double)to.y) / 2.0) };
+	int halfwayX = (from.x + to.x) / 2;
+	int halfwayY = (from.y + to.y) / 2;
+	return { halfwayX, halfwayY };
 }
+
 
 // Clamp an integer value between a minimum and maximum value
 int MathManager::ClampI(const int a, const int min, const int max)
 {
-	return std::min(std::max(a, min), max);
+	if (a < min)
+		return min;
+	else if (a > max)
+		return max;
+	else
+		return a;
 }
+

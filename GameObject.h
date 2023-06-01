@@ -9,8 +9,8 @@ public:
     void Draw(SDL_Renderer* pRenderer);
     void UpdatePositionX(float x);
     void UpdatePositionY(float y);
-    SDL_FRect& GetTransform() { return m_Transform; }
+    SDL_FRect& GetTransform() { return m_PositionSize; }
 private:
-    SDL_FRect m_Transform;
-    SDL_Color m_Color;
+    SDL_FRect m_PositionSize;
+    SDL_Color m_ObjectColor;
 };

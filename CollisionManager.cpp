@@ -1,9 +1,9 @@
 #include "CollisionManager.h"
 #define BUFFER 0.2
 
-bool CollisionManager::AABBCheck(const SDL_Rect& object1, const SDL_Rect& object2)
+bool CollisionManager::AABBCheck(const SDL_Rect& ob1, const SDL_Rect& ob2)
 {
-	return SDL_HasIntersection(&object1, &object2);
+	return SDL_HasIntersection(&ob1, &ob2);
 }
 
 bool CollisionManager::AABBCheck(const SDL_Rect& object1, const SDL_FRect& object2)

@@ -32,19 +32,17 @@ void StateManager::PushState(State* pState)
 // Pop the top state from the state stack
 void StateManager::PopState()
 {
-	// If only one state in vector, return
-	if (s_states.size() <= 1)
-		return;
-
 	if (!s_states.empty())
 	{
 		s_states.back()->Exit();
 		delete s_states.back();
-		s_states.back() = nullptr;
 		s_states.pop_back();
 	}
-	s_states.back()->Resume();
+
+	if (!s_states.empty())
+		s_states.back()->Resume();
 }
+
 
 // Change the current state to a new state
 void StateManager::ChangeState(State* pState)
@@ -53,12 +51,13 @@ void StateManager::ChangeState(State* pState)
 	{
 		s_states.back()->Exit();
 		delete s_states.back();
-		s_states.back() = nullptr;
 		s_states.pop_back();
 	}
+
 	s_states.push_back(pState);
 	s_states.back()->Enter();
 }
+
 
 // Quit the state manager and clean up all states
 void StateManager::Quit()

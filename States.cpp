@@ -44,7 +44,7 @@ void TitleState::Exit()
 void MenuState::Enter()
 {
 	// Function called when entering the MenuState
-	std::cout << "Entering MenuState..." << std::endl;
+	std::cout << "Entering the MenuState..." << std::endl;
 }
 
 void MenuState::Update(float deltaTime)
@@ -55,13 +55,13 @@ void MenuState::Update(float deltaTime)
 	if (GameInstance.KeyDown(SDL_SCANCODE_C))
 	{
 		// Transition to the CreditState if 'C' key is pressed
-		std::cout << "Changing to CreditState..." << std::endl;
+		std::cout << "Changing to the CreditState..." << std::endl;
 		StateManager::ChangeState(new CreditState());
 	}
 	else if (GameInstance.KeyDown(SDL_SCANCODE_G))
 	{
 		// Push the GameState onto the state stack if 'G' key is pressed
-		std::cout << "Changing to GameState..." << std::endl;
+		std::cout << "Changing to the GameState..." << std::endl;
 		StateManager::PushState(new GameState());
 	}
 }
@@ -76,7 +76,7 @@ void MenuState::Render()
 void MenuState::Exit()
 {
 	// Function called when exiting the MenuState
-	std::cout << "Exiting MenuState..." << std::endl;
+	std::cout << "Exiting the MenuState..." << std::endl;
 }
 // End MenuState
 
@@ -84,7 +84,7 @@ void MenuState::Exit()
 void CreditState::Enter()
 {
 	// Function called when entering the CreditState
-	std::cout << "Entering CreditState..." << std::endl;
+	std::cout << "Entering the CreditState..." << std::endl;
 }
 
 void CreditState::Update(float deltaTime)
@@ -110,7 +110,7 @@ void CreditState::Render()
 void CreditState::Exit()
 {
 	// Function called when exiting the CreditState
-	std::cout << "Exiting CreditState..." << std::endl;
+	std::cout << "Exiting the CreditState..." << std::endl;
 }
 // End CreditState
 
@@ -118,7 +118,7 @@ void CreditState::Exit()
 void GameState::Enter()
 {
 	// Function called when entering the GameState
-	std::cout << "Entering GameState..." << std::endl;
+	std::cout << "Entering the GameState..." << std::endl;
 
 	// Generate random positions, sizes, and colors for squares
 	for (int i = 0; i < 10; ++i)
@@ -155,7 +155,7 @@ void GameState::Update(float deltaTime)
 	if (GameInstance.KeyDown(SDL_SCANCODE_P))
 	{
 		// Push the PauseState onto the state stack if 'P' key is pressed
-		std::cout << "Changing to PauseState..." << std::endl;
+		std::cout << "Changing to the PauseState..." << std::endl;
 		StateManager::PushState(new PauseState());
 	}
 	else
@@ -199,7 +199,7 @@ void GameState::Render()
 	// Render logic for the GameState
 	SDL_Renderer* pRenderer = Game::GetInstance().GetRenderer();
 
-	SDL_SetRenderDrawColor(pRenderer, 0, 0, 150, 150);
+	SDL_SetRenderDrawColor(pRenderer, 0, 0, 155, 155);
 	SDL_RenderClear(pRenderer);
 
 	// Render all game objects in the gameObjects vector
@@ -212,7 +212,7 @@ void GameState::Render()
 void GameState::Exit()
 {
 	// Function called when exiting the GameState
-	std::cout << "Exiting GameState..." << std::endl;
+	std::cout << "Exiting the GameState..." << std::endl;
 
 	// Delete and clean up all game objects
 	for (GameObject* pObject : m_gameObjects)
@@ -225,7 +225,7 @@ void GameState::Exit()
 void GameState::Resume()
 {
 	// Function called when resuming the GameState
-	std::cout << "Resuming GameState..." << std::endl;
+	std::cout << "Resuming the GameState..." << std::endl;
 }
 // End GameState
 
@@ -233,7 +233,7 @@ void GameState::Resume()
 void PauseState::Enter()
 {
 	// Function called when entering the PauseState
-	std::cout << "Entering PauseState..." << std::endl;
+	std::cout << "Entering the PauseState..." << std::endl;
 }
 
 void PauseState::Update(float deltaTime)
@@ -249,7 +249,7 @@ void PauseState::Update(float deltaTime)
 void PauseState::Render()
 {
 	// Render logic for the PauseState
-	SDL_SetRenderDrawColor(Game::GetInstance().GetRenderer(), 128, 128, 128, 128);
+	SDL_SetRenderDrawColor(Game::GetInstance().GetRenderer(), 123, 123, 123, 123);
 	SDL_Rect rect = { 256, 128, 512, 512 };
 	SDL_RenderFillRect(Game::GetInstance().GetRenderer(), &rect);
 }
@@ -257,7 +257,7 @@ void PauseState::Render()
 void PauseState::Exit()
 {
 	// Function called when exiting the PauseState
-	std::cout << "Exiting PauseState..." << std::endl;
+	std::cout << "Exiting the  PauseState..." << std::endl;
 }
 // End PauseState
 
@@ -318,7 +318,7 @@ void LoseState::Update(float deltaTime)
 void LoseState::Render()
 {
 	// Render logic for the LoseState
-	SDL_SetRenderDrawColor(Game::GetInstance().GetRenderer(), 225, 0, 0, SDL_ALPHA_OPAQUE);
+	SDL_SetRenderDrawColor(Game::GetInstance().GetRenderer(), 120, 0, 0, SDL_ALPHA_OPAQUE);
 	SDL_RenderClear(Game::GetInstance().GetRenderer());
 }
 
