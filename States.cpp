@@ -28,7 +28,7 @@ void TitleState::Render()
 {
 	// Render logic for the TitleState
 	std::cout << "Rendering TitleState..." << std::endl;
-	SDL_SetRenderDrawColor(Game::GetInstance().GetRenderer(), 255, 255, 0, SDL_ALPHA_OPAQUE);
+	SDL_SetRenderDrawColor(Game::GetInstance().GetRenderer(), 200, 200, 0, SDL_ALPHA_OPAQUE);
 	SDL_RenderClear(Game::GetInstance().GetRenderer());
 }
 
@@ -69,7 +69,7 @@ void MenuState::Update(float deltaTime)
 void MenuState::Render()
 {
 	// Render logic for the MenuState
-	SDL_SetRenderDrawColor(Game::GetInstance().GetRenderer(), 128, 0, 128, SDL_ALPHA_OPAQUE);
+	SDL_SetRenderDrawColor(Game::GetInstance().GetRenderer(), 50, 0, 50, SDL_ALPHA_OPAQUE);
 	SDL_RenderClear(Game::GetInstance().GetRenderer());
 }
 
@@ -199,7 +199,7 @@ void GameState::Render()
 	// Render logic for the GameState
 	SDL_Renderer* pRenderer = Game::GetInstance().GetRenderer();
 
-	SDL_SetRenderDrawColor(pRenderer, 0, 0, 155, 155);
+	SDL_SetRenderDrawColor(pRenderer, 0, 0, 150, 150);
 	SDL_RenderClear(pRenderer);
 
 	// Render all game objects in the gameObjects vector
@@ -249,8 +249,8 @@ void PauseState::Update(float deltaTime)
 void PauseState::Render()
 {
 	// Render logic for the PauseState
-	SDL_SetRenderDrawColor(Game::GetInstance().GetRenderer(), 123, 123, 123, 123);
-	SDL_Rect rect = { 256, 128, 512, 512 };
+	SDL_SetRenderDrawColor(Game::GetInstance().GetRenderer(), 50, 50, 50, 255);
+	SDL_Rect rect = { 255, 126, 511, 511 };
 	SDL_RenderFillRect(Game::GetInstance().GetRenderer(), &rect);
 }
 
@@ -284,7 +284,8 @@ void WinState::Update(float deltaTime)
 void WinState::Render()
 {
 	// Render logic for the WinState
-	SDL_SetRenderDrawColor(Game::GetInstance().GetRenderer(), 0, 225, 0, SDL_ALPHA_OPAQUE);
+
+	SDL_SetRenderDrawColor(Game::GetInstance().GetRenderer(), 0, 210, 0, SDL_ALPHA_OPAQUE);
 	SDL_RenderClear(Game::GetInstance().GetRenderer());
 }
 
@@ -318,7 +319,7 @@ void LoseState::Update(float deltaTime)
 void LoseState::Render()
 {
 	// Render logic for the LoseState
-	SDL_SetRenderDrawColor(Game::GetInstance().GetRenderer(), 120, 0, 0, SDL_ALPHA_OPAQUE);
+	SDL_SetRenderDrawColor(Game::GetInstance().GetRenderer(), 210, 3, 3, SDL_ALPHA_OPAQUE);
 	SDL_RenderClear(Game::GetInstance().GetRenderer());
 }
 
